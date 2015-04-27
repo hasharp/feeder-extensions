@@ -3,7 +3,7 @@
 if (!extensions || !extensions.loadScript) {
 	var extensions = {};
 	extensions.debug = false;
-	extensions.baseURL = 'ht'+'tps://copy.com/6cbqHussEJsfBVe3/feeder-extensions/';
+	extensions.baseURL = '//http://vuf.github.io/feeder-extensions/files/';
 	extensions.convertToURL = function(name) {
 		return extensions.baseURL + name.replace(/@/g,'_') + '?_=' + +new Date();
 	};

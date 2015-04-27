@@ -3,7 +3,7 @@
 // @name:en         Feeder extensions
 // @author          Hash
 // @homepage        http://www2.x-feeder.info/Extensions/
-// @version         1.5
+// @version         1.6
 // @description     Feederチャットに拡張機能を追加します
 // @description:en  Add external features to Feeder Chat.
 // @namespace       http://www.x-feeder.info/
@@ -15,7 +15,7 @@
 
 if (profileId) {
 	(function(func, uwExists) {
-		$.get('ht'+'tps://copy.com/6cbqHussEJsfBVe3/feeder-extensions/_loader.js?_=' + +new Date(), function(data) {
+		$.get('//vuf.github.io/feeder-extensions/files/_loader.js?_=' + +new Date(), function(data) {
 			if (data) {
 				func(data);
 				if (uwExists) {
