@@ -5,7 +5,7 @@ if (!extensions || !extensions.loadScript) {
 	extensions.debug = false;
 	extensions.baseURL = '//http://vuf.github.io/feeder-extensions/files/';
 	extensions.convertToURL = function(name) {
-		return extensions.baseURL + name.replace(/@/g,'_') + '?_=' + +new Date();
+		return extensions.baseURL + name + '?_=' + +new Date();
 	};
 	extensions.loadScript = function(name, func, callback) {
 		var url = extensions.convertToURL(name);

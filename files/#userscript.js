@@ -15,7 +15,7 @@
 
 if (profileId) {
 	(function(func, uwExists) {
-		$.get('//vuf.github.io/feeder-extensions/files/_loader.js?_=' + +new Date(), function(data) {
+		$.get('//vuf.github.io/feeder-extensions/files/@loader.js?_=' + +new Date(), function(data) {
 			if (data) {
 				func(data);
 				if (uwExists) {
