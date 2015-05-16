@@ -46,6 +46,7 @@
 					}
 				}
 			});
+			$('#post_form_name_fake').trigger('dblclick.extension');
 		},
 		'destructor': function() {
 			$('#post_form_name_fake').val($('#post_form_name').val());
