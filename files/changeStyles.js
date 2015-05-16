@@ -4,7 +4,7 @@
 	return {
 		'constructor': function() {
 			$('#input_bold, #input_italic, #input_strike, #input_underline').css('display', 'none');
-			$('#text_decorator_frame').css('width', '56px');
+			$('#text_decorator_frame').css('width', '58px');
 			$.each($('#navi_right').children('p'), function() {
 				var caption = $(this).text();
 				$(this).children('img').attr('title', caption);
