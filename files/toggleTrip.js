@@ -48,7 +48,6 @@
 			});
 		},
 		'destructor': function() {
-			console.log('destructor');
 			$('#post_form_name_fake').val($('#post_form_name').val());
 			$('#post_form_name').remove();
 			$('#post_form_name_fake').off('keyup.extension blur.extension dblclick.extension');
