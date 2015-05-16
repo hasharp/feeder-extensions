@@ -26,6 +26,12 @@ if (extensions && !extensions.features) {
 				'caption':     'UC時にUnicornを流す（自己責任）',
 				'description': 'ダイス結果にUCが出た時にUnicornを流します（自己責任）',
 			},
+			'rollDiceFromExpression': {
+				'available':   ext.debug,
+				'selected':    true,
+				'caption':     '式からダイスロールを行う',
+				'description': '投稿内容に式を入力してダイスロールを行います',
+			},
 			'addPicturePicker': {
 				'available':   true,
 				'selected':    true,
