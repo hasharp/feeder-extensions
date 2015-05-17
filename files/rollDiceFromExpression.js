@@ -7,7 +7,7 @@
 		var content = $('#'+activeForm).val();
 		
 		// ダイスロール
-		if (content.match(/\d{1,2}d\d{1,3}/) && content.match(/^[\dd+\- ]+$/)) {
+		if ((content.length < 50) && content.match(/\d{1,2}d\d{1,3}/) && content.match(/^[\dd+\- ]+$/)) {
 			$('#' + activeForm).val('');
 			if (activeForm == 'post_form_multi' && typeof(defaultHeight) != 'undefined') {
 				resetFormHeight();
