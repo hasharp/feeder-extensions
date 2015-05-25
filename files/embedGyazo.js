@@ -41,9 +41,9 @@
 			
 			// キャッシュがないので取得する
 			$.get(
-				'ht'+'tps://query.yahooapis.com/v1/public/yql',
+				'https://query.yahooapis.com/v1/public/yql',
 				{
-					'q':      'select * from html where url="ht'+'tps://api.gyazo.com/api/oembed?url='+encodeURIComponent(ourl)+'"',
+					'q':      'select * from html where url="https://api.gyazo.com/api/oembed?url='+encodeURIComponent(ourl)+'"',
 					'format': 'json',
 					'env':    'store://datatables.org/alltableswithkeys',
 				},
@@ -53,7 +53,7 @@
 						if (!data) {
 							throw('Nothing was returned.');
 						}
-						url = JSON.parse(data['query']['results']['body'])['url'];
+						url = JSON.parse(data['query']['results']['body'])['url'].replace(/\/\/bot\./i, '//i.');
 					} catch(e) {
 						// 取得処理に何らかのエラーが発生し、失敗した
 						
