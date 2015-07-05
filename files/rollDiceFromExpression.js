@@ -27,7 +27,7 @@
 							syncMyStatus();
 						}
 					} else {
-						$('#' + activeForm).val(formula);
+						$('#' + activeForm).val(content);
 						if (!result.match(/^<\?xml.*/)) {
 							alert(result);
 						} else {
