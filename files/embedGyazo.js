@@ -53,7 +53,8 @@
 						if (!data) {
 							throw('Nothing was returned.');
 						}
-						url = JSON.parse(data['query']['results']['body'])['url'].replace(/\/\/bot\./i, '//i.');
+						url = JSON.parse(data['query']['results']['body'])['url']
+						//url = url.replace(/\/\/bot\./i, '//embed.');
 					} catch(e) {
 						// 取得処理に何らかのエラーが発生し、失敗した
 						
