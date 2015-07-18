@@ -46,6 +46,8 @@
 					}
 				}
 			});
+			
+			// デフォルトで隠す
 			$('#post_form_name_fake').trigger('dblclick.extension');
 		},
 		'destructor': function() {
