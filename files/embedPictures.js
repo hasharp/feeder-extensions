@@ -12,7 +12,7 @@
 		},
 		'resize': function() {
 			// 画像の最大サイズ制限
-			common.setStyle('.extension-embed-image, .extension-embed-image-nolazyload', 'max-width: '+common.embedWidth+'px; max-height: '+(common.embedWidth*2)+'px;');
+			common.setStyle('.extension-embed-image, .extension-embed-image-nolazyload', 'max-width: '+common.embedWidth+'px; max-height: '+common.embedWidth+'px;');
 		},
 		'load': function() {
 			// LazyLoad
