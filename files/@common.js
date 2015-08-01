@@ -11,6 +11,7 @@ ninja_ads_count = 3;
 	self.dummyImage      = 'img/icons/status_1.gif';
 	self.failedImage     = 'img/emoticons/12.gif';
 	self.embedWidth      = 320;
+	self.embedHeight     = 320;
 	self.deletedPictures = [];
 	
 	

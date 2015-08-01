@@ -66,7 +66,7 @@
 							var ext = filename.split('.').pop().toLowerCase();
 							for (var i in mimetypes) {
 								if (ext in mimetypes[i]) {
-									appendix = '<br><'+i+' preload="none" controls class="extension-embed-av-'+i+'"><source src="'+url+'" type="'+mimetypes[i][ext]+'"></audio>';
+									appendix = '<br><'+i+' preload="none" controls class="extension-embed-av-'+i+' extension-embed-image"><source src="'+url+'" type="'+mimetypes[i][ext]+'"></'+i+'>';
 									break;
 								}
 							}
@@ -79,9 +79,6 @@
 		},
 		'destructor': function() {
 			common.removeFilter('embedAV');
-		},
-		'resize': function() {
-			common.setStyle('.extension-embed-av-audio, .extension-embed-av-video', 'width: '+common.embedWidth+'px;');
 		},
 	};
 });

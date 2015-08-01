@@ -16,14 +16,14 @@
 		'constructor': function() {
 			common.addFilter('embedNiconico', function(entries, skelton) {
 				entries = common.replaceURLs(entries, function(url, entry) {
-					var matches = url.match(/^https?:\/\/www\.nicovideo\.jp\/watch\/(\w+)/i);
+					var matches = url.match(/^https?:\/\/(?:www|m)\.nicovideo\.jp\/watch\/(\w+)/i);
 					if (matches) {
 						self.neCount++;
 						var id = 'nicoEmbed_' + entry[0] + '_' + self.neCount;
 						self.neCallbacks[id] = function(player) {
 							self.neCallback(player, id);
 						};
-						return '<script type="text/javascript" src="ht'+'tp://ext.nicovideo.jp/thumb_watch/'+matches[1]+'?n=1&cb='+fqon+'.neCallbacks.'+id+'"></script><div id="'+id+'" class="extension-embed-niconico-container"></div>';
+						return '<script type="text/javascript" src="http://ext.nicovideo.jp/thumb_watch/'+matches[1]+'?n=1&cb='+fqon+'.neCallbacks.'+id+'"></script><div id="'+id+'" class="extension-embed-niconico-container"></div>';
 					}
 				});
 				return entries;
@@ -33,7 +33,11 @@
 			common.removeFilter('embedNiconico');
 		},
 		'resize': function() {
-			common.setStyle('.extension-embed-niconico', 'width: '+(common.embedWidth+10)+'px; height: '+(common.embedWidth/16*9+37)+'px;');
+			if ((common.embedWidth - 10) * 9 < (common.embedHeight - 37) * 16) {
+				common.setStyle('.extension-embed-niconico', 'width: '+common.embedWidth+'px; height: '+((common.embedWidth-10)/16*9+37)+'px;');
+			} else {
+				common.setStyle('.extension-embed-niconico', 'width: '+((common.embedHeight-37)*16/9+10)+'px; height: '+common.embedHeight+'px;');
+			}
 		},
 		'startup': function() {
 			common.setStyle('.extension-embed-niconico-container', 'display: inline-block;');

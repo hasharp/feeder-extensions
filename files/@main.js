@@ -204,7 +204,8 @@ if (extensions && !extensions.features) {
 		// 読み込み
 		ext.loadStorage();
 		ext.globalConfig = (ext.getCookie('egc', false) != '0');
-		ext.commonFunctions.embedWidth = ext.getCookie('eew', ext.globalConfig) ? Math.max(parseInt(ext.getCookie('eew', ext.globalConfig)), 1) : 320;
+		ext.commonFunctions.embedWidth  = ext.getCookie('eew', ext.globalConfig) ? Math.max(parseInt(ext.getCookie('eew', ext.globalConfig)), 1) : 320;
+		ext.commonFunctions.embedHeight = ext.getCookie('eeh', ext.globalConfig) ? Math.max(parseInt(ext.getCookie('eeh', ext.globalConfig)), 1) : ext.commonFunctions.embedWidth;
 		
 		
 		// 拡張機能選択欄追加
@@ -316,6 +317,7 @@ if (extensions && !extensions.features) {
 			data += '			<input type="checkbox" id="extension_globalconfig"'+(ext.getCookie('egc',ext.globalConfig)!='0'?' checked':'')+'><label for="extension_globalconfig">全ルーム共通の設定を使用する</label><br>\n';
 			data += '			<input type="checkbox" id="extension_skipdialog"'+(ext.getCookie('esd',ext.globalConfig)!='0'?' checked':'')+'><label for="extension_skipdialog">起動時に選択画面を表示しない</label><br>\n';
 			data += '			<label for="extension_skipdialog">埋め込み動画像の幅</label><input type="text" id="extension_embedwidth" style="width: 4em; margin: 0 0.5em;" value="'+ext.commonFunctions.embedWidth+'">px<br>\n';
+			data += '			<label for="extension_skipdialog">埋め込み動画像の高さ</label><input type="text" id="extension_embedheight" style="width: 4em; margin: 0 0.5em;" value="'+ext.commonFunctions.embedHeight+'">px<br>\n';
 			data += '		</div>\n';
 			data += '	</div>\n';
 			data += '	<div>\n';
@@ -421,7 +423,8 @@ if (extensions && !extensions.features) {
 				
 				// 内部変数に設定を保存
 				ext.globalConfig = $('#extension_globalconfig').prop('checked');
-				ext.commonFunctions.embedWidth = Math.max(parseInt($('#extension_embedwidth').val()), 1);
+				ext.commonFunctions.embedWidth  = Math.max(parseInt($('#extension_embedwidth').val()),  1);
+				ext.commonFunctions.embedHeight = Math.max(parseInt($('#extension_embedheight').val()), 1);
 				
 				// クッキーに設定を保存
 				var saveConfig = $('#extension_saveconf').prop('checked');
@@ -437,9 +440,10 @@ if (extensions && !extensions.features) {
 						}
 					}
 					
-					ext.setCookie('esf', '-'+selectedFeatures.join('-'),                        ext.globalConfig);
+					ext.setCookie('esf', '-'+selectedFeatures.join('-'),                           ext.globalConfig);
 					ext.setCookie('esd', ($('#extension_skipdialog').prop('checked') ? '1' : '0'), ext.globalConfig);
 					ext.setCookie('eew', ''+ext.commonFunctions.embedWidth,                        ext.globalConfig);
+					ext.setCookie('eeh', ''+ext.commonFunctions.embedHeight,                       ext.globalConfig);
 				}
 				ext.setCookie('esc', (saveConfig ? '1' : '0'),                                 ext.globalConfig);
 				

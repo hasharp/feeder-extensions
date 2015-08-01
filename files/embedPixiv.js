@@ -4,6 +4,17 @@
 	var originalWidth = 700;
 	return {
 		'peCount': 0,
+		'updateSize': function($obj) {
+			var height = $obj.data('height');
+			var scale = Math.min(common.embedWidth / originalWidth, common.embedHeight / height, 1);
+			$obj.css({
+				'margin-right': ''+((scale-1)*originalWidth)+'px',
+				'margin-bottom': ''+((scale-1)*height)+'px',
+				'-ms-transform': 'scale('+scale+')',
+				'-webkit-transform': 'scale('+scale+')',
+				'transform': 'scale('+scale+')'
+			});
+		},
 		'constructor': function() {
 			common.addFilter('embedPixiv', function(entries, skelton) {
 				var i = 0;
@@ -12,19 +23,21 @@
 					if (matches) {
 						self.peCount++;
 						var id = 'embedPixiv_' + entry[0] + '_' + self.peCount;
-						return '<iframe src="ht'+'tp://embed.pixiv.net/embed_mk2.php?id='+matches[1]+'&size=large&border=on" id="'+id+'" name="'+id+'" class="extension-embed-pixiv" frameborder="0"></iframe>';
+						return '<iframe src="http://embed.pixiv.net/embed_mk2.php?id='+matches[1]+'&size=large&border=on" id="'+id+'" name="'+id+'" class="extension-embed-pixiv" frameborder="0"></iframe>';
 					}
 				});
 				return entries;
 			});
 			$(window).on('message.extension', function(event) {
-				if (event.originalEvent.origin != 'ht'+'tp://embed.pixiv.net') {
+				if (event.originalEvent.origin != 'http://embed.pixiv.net') {
 					return;
 				}
 				var data = JSON.parse(event.originalEvent.data);
-				$('#'+data[0]).css('height', data[1]+'px');
-				$('#'+data[0]).css('margin-bottom', ((common.embedWidth/originalWidth-1)*data[1])+'px');
-				$('#'+data[0]).addClass('extension-embed-pixiv-loaded');
+				var $obj = $('#'+data[0]);
+				$obj.data('height', data[1]);
+				$obj.css('height', data[1]+'px');
+				$obj.addClass('extension-embed-pixiv-loaded');
+				self.updateSize($obj);
 			});
 		},
 		'destructor': function() {
@@ -32,19 +45,8 @@
 			$(window).off('message.extension');
 		},
 		'resize': function() {
-			var scale = common.embedWidth / originalWidth;
-			var style = (
-				''
-				+ '-ms-transform: scale('+scale+');'
-				+ '-webkit-transform: scale('+scale+');'
-				+ 'transform: scale('+scale+');'
-				+ 'margin-right: '+(common.embedWidth-originalWidth)+'px;'
-			);
-			common.setStyle('.extension-embed-pixiv', style);
-			
 			$('.extension-embed-pixiv-loaded').each(function() {
-				var height = parseFloat($(this).css('height'));
-				$(this).css('margin-bottom', ((common.embedWidth/originalWidth-1)*height)+'px');
+				self.updateSize($(this));
 			});
 		},
 		'startup': function() {

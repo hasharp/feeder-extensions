@@ -7,7 +7,7 @@
 				entries = common.replaceURLs(entries, function(url, entry) {
 					var matches = url.match(/^http:\/\/seiga.nicovideo.jp\/seiga\/im(\d+)/i);
 					if (matches) {
-						return '<img src="'+common.loadingImage+'" alt="ht'+'tp://lohas.nicoseiga.jp/thumb/'+matches[1]+'l" data-original="ht'+'tp://lohas.nicoseiga.jp/thumb/'+matches[1]+'l" class="extension-embed-image" />';
+						return '<img src="'+common.loadingImage+'" alt="http://lohas.nicoseiga.jp/thumb/'+matches[1]+'l" data-original="http://lohas.nicoseiga.jp/thumb/'+matches[1]+'l" class="extension-embed-image" />';
 					}
 				});
 				return entries;
