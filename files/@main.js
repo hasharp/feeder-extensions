@@ -282,7 +282,7 @@ if (extensions && !extensions.features) {
 			data += '		<div id="extension-config-tabs-1" style="text-align: center;">\n';
 			data += '			<div>\n';
 			data += '				使用する機能を選択してください<br>\n';
-			data += '				本ダイアログはヘッダの<img src="img/emoticons/180.gif" style="margin: 0 0.5em; border: 0 none transparent;" />から何回でも呼び出せます<br>\n';
+			data += '				本ダイアログはヘッダの<img src="img/emoticons/180.gif" style="margin: 0 0.5em; border: 0 none transparent;" />からいつでも開けます<br>\n';
 			data += '			</div>\n';
 			data += '			<div style="display: table; margin: 0.3em auto;">\n';
 			data += '				<div style="display: table-row; font-weight: bold;">\n';
@@ -316,8 +316,8 @@ if (extensions && !extensions.features) {
 			data += '		<div id="extension-config-tabs-2" style="line-height: 2em;">\n';
 			data += '			<input type="checkbox" id="extension_globalconfig"'+(ext.getCookie('egc',ext.globalConfig)!='0'?' checked':'')+'><label for="extension_globalconfig">全ルーム共通の設定を使用する</label><br>\n';
 			data += '			<input type="checkbox" id="extension_skipdialog"'+(ext.getCookie('esd',ext.globalConfig)!='0'?' checked':'')+'><label for="extension_skipdialog">起動時に選択画面を表示しない</label><br>\n';
-			data += '			<label for="extension_skipdialog">埋め込み動画像の幅</label><input type="text" id="extension_embedwidth" style="width: 4em; margin: 0 0.5em;" value="'+ext.commonFunctions.embedWidth+'">px<br>\n';
-			data += '			<label for="extension_skipdialog">埋め込み動画像の高さ</label><input type="text" id="extension_embedheight" style="width: 4em; margin: 0 0.5em;" value="'+ext.commonFunctions.embedHeight+'">px<br>\n';
+			data += '			<label for="extension_skipdialog">埋め込み動画像の最大幅</label><input type="text" id="extension_embedwidth" style="width: 4em; margin: 0 0.5em;" value="'+ext.commonFunctions.embedWidth+'">px<br>\n';
+			data += '			<label for="extension_skipdialog">埋め込み動画像の最大高さ</label><input type="text" id="extension_embedheight" style="width: 4em; margin: 0 0.5em;" value="'+ext.commonFunctions.embedHeight+'">px<br>\n';
 			data += '		</div>\n';
 			data += '	</div>\n';
 			data += '	<div>\n';
