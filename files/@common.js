@@ -36,10 +36,14 @@ ninja_ads_count = 3;
 						.attr('title', '投稿を再読み込み')
 						.css('height', '13px')
 						.css('margin', '0 6px 0 2px')
+						.css('cursor', 'pointer')
 						.click(function() {
 							var $entry = $(this).parents('.comment_frame').parent();
 							$entry.removeData('loaded');
-							$entry.html($(window.arrangeFeed([$entry.data('original-entry')], false)).children());
+							$entry.find('.comment td:first').html($('<img/>').attr('src', self.loadingImage));
+							setTimeout(function() {
+								$entry.html($(window.arrangeFeed([$entry.data('original-entry')], false)).children());
+							}, 500);
 						})
 					)
 			);
