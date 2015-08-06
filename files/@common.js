@@ -3,7 +3,8 @@ ninja_ads_count = 3;
 
 (function(ext, fqon) {
 	// 格納用オブジェクト
-	var self = {};
+	var self    = {};
+	var entries = {};
 	
 	
 	// 定義
@@ -18,10 +19,40 @@ ninja_ads_count = 3;
 	
 	// 投稿を読み終わった時に呼ばれる関数
 	self.loadedEntries = function() {
+		// ロード後に呼ぶ関数を呼ぶ
 		ext.enabledFeatures.forEach(function(feature) {
 			var func = ext.features[feature].objects.load;
 			func && func();
 		});
+		
+		// リロードボタンを追加
+		$('#feed_list tr[id]:not(:data(loaded)) .comment .reference_icn')
+			.after(
+				$('<span/>')
+					.addClass('reload_icn')
+					.append(
+						$('<img/>')
+						.attr('src', 'img/emoticons/230.gif')
+						.attr('title', '投稿を再読み込み')
+						.css('height', '13px')
+						.css('margin', '0 6px 0 2px')
+						.click(function() {
+							var $entry = $(this).parents('.comment_frame').parent();
+							$entry.removeData('loaded');
+							$entry.html($(window.arrangeFeed([$entry.data('original-entry')], false)).children());
+						})
+					)
+			);
+		
+		// オリジナルのentryを登録＆ロードフラグをセット
+		for (var i=0; i<entries.length; i++) {
+			var $entry = $('#' + entries[i][0]);
+			$entry.data('original-entry', entries[i]);
+			$entry.data('loaded', true);
+		}
+		
+		// エントリを消去
+		entries = {};
 	};
 	
 	
@@ -73,6 +104,10 @@ ninja_ads_count = 3;
 	var lazyLoadTimer = null;
 	var orgArrangeFeed = window.arrangeFeed;
 	window.arrangeFeed = function(entry, skelton) {
+		// エントリをコピー
+		entries = JSON.parse(JSON.stringify(entry));
+		
+		// フィルタ処理
 		for (var i in filterFunctions) {
 			entry = filterFunctions[i](entry, skelton);
 		}
@@ -139,7 +174,7 @@ ninja_ads_count = 3;
 	self.removeDeletedPictures = function(target) {
 		self.deletedPictures.forEach(function(id) {
 			target = target.filter(function(element) {
-				return element.n != id
+				return element.n != id;
 			});
 		});
 		self.deletedPictures = [];
@@ -155,7 +190,7 @@ ninja_ads_count = 3;
 		
 		// 既に一覧にあったら消す
 		target = target.filter(function(element) {
-			return element.n != id
+			return element.n != id;
 		});
 		
 		// 一番上に登録
