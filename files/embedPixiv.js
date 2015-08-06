@@ -36,6 +36,7 @@
 				var $obj = $('#'+data[0]);
 				$obj.data('height', data[1]);
 				$obj.css('height', data[1]+'px');
+				$obj.css('width', originalWidth+'px');
 				$obj.addClass('extension-embed-pixiv-loaded');
 				self.updateSize($obj);
 			});
@@ -57,8 +58,8 @@
 					+ '-ms-transform-origin: 0 0;'
 					+ '-webkit-transform-origin: 0 0;'
 					+ 'transform-origin: 0 0;'
-					+ 'width: 700px;'
-					+ 'height: 40px;'						// 暫定的な高さ（丁度Pixivのロゴだけが見えるように）
+					+ 'width: ' + common.embedWidth + 'px;'		// 暫定的な幅（この段階ではまだ縮小指定をかけていないため）
+					+ 'height: 40px;'							// 暫定的な高さ（丁度Pixivのロゴだけが見えるように）
 				)
 			);
 		},
