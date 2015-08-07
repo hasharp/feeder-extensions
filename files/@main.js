@@ -135,7 +135,7 @@ if (extensions && !extensions.features) {
 				'description': 'ログを閲覧しているときに新たな投稿を受信した際、左上にトーストで通知します',
 			},
 			'changeStyles': {
-				'available':   ext.debug,
+				'available':   true/*ext.debug*/,
 				'selected':    false,
 				'caption':     'スタイルを変更（製作者用）',
 				'description': '製作者好みのスタイルに変更します',
