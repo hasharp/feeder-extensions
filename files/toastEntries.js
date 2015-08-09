@@ -29,7 +29,7 @@
 				
 				toastr.info(body, head, {
 					'toastClass': 'toast',
-					'positionClass': 'toast-top-left',
+					'positionClass': 'toast-top-right',
 					'onclick': function() {
 						$('html, body').animate({scrollTop: 0}, 500);
 					},
