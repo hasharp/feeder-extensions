@@ -5,7 +5,7 @@
 		'constructor': function() {
 			common.addFilter('embedTwitter', function(entries, skelton) {
 				entries = common.replaceURLs(entries, function(url, entry) {
-					var matches = url.match(/^https?:\/\/twitter\.com\/(?:.*)\/status(?:es)?\/(\d+)(?:\/.*)?$/);
+					var matches = url.match(/^https?:\/\/twitter\.com\/(?:.*)\/status(?:es)?\/(\d+)(?:[\/?].*)?$/);
 					if (matches) {
 						//return '<blockquote class="twitter-tweet extension-embed-twitter"><a href="'+url+'"></a></blockquote>';
 						return '<div class="extension-embed-twitter-unloaded" data-url="'+url+'" data-id="'+matches[1]+'"></div>';
