@@ -140,7 +140,7 @@ ninja_ads_count = 3;
 		$('#post_form_name').val(postData.name);
 		$('#' + activeForm).val(postData.content);
 		$('#is_special').prop('checked', postData.isImportant);
-		$('#category_id_for_post_' + postData.category).val('checked', true);
+		$('#category_id_for_post_' + postData.category).prop('checked', true);
 		
 		// オリジナルの関数を呼び出す
 		orgPostFeed.call(this);
@@ -162,7 +162,9 @@ ninja_ads_count = 3;
 		
 		// 読み込み完了時にイベントを発火するためのスクリプトを挿入する
 		// 雑なやり方（最後のresultに追加する方法）だと次の投稿の読み取りが上手くいかない模様
-		entry[entry.length-1][5] += '<script type="text/javascript">'+fqon+'.loadedEntries();</script>';
+		if (!skelton) {
+			entry[entry.length-1][5] += '<script type="text/javascript">'+fqon+'.loadedEntries();</script>';
+		}
 		
 		// オリジナルの関数を呼び出す
 		var result = orgArrangeFeed.call(this, entry, skelton);
