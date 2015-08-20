@@ -26,6 +26,12 @@ if (extensions && !extensions.features) {
 				'caption':     'UC時にUnicornを流す（自己責任）',
 				'description': 'ダイス結果にUCが出た時にUnicornを流します（自己責任）',
 			},
+			'dropFile': {
+				'available':   true,
+				'selected':    false,
+				'caption':     'ファイルや画像をドロップしてアップロード',
+				'description': '投稿欄にファイルや画像をドラッグ＆ドロップでアップロードできるようにします',
+			},
 			'rollDiceFromExpression': {
 				'available':   true,
 				'selected':    true,
