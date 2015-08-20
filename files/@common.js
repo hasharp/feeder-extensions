@@ -16,6 +16,16 @@ ninja_ads_count = 3;
 	self.deletedPictures = [];
 	
 	
+	// 部屋情報取得
+	var isPremium = !!$('#header>h1>img[src$="/crown.png"]').length;
+	
+	self.roomInfo = {
+		isPremium:          isPremium,
+		maxFileSize:        (isPremium ? 100 : 10) * 1024 * 1024,
+		maxPictureFileSize: 5 * 1024 * 1024,
+	};
+	
+	
 	
 	// 投稿を読み終わった時に呼ばれる関数
 	self.loadedEntries = function() {
