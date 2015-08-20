@@ -21,7 +21,7 @@
 					
 					formData.append('front_comment', match[1]);
 					formData.append('rear_comment', match[3]);
-					formData.append('frame_size', match[2] || '2');
+					formData.append('frame_size', match[2] || '0');
 					formData.append('picture', self.pendingFile.file);
 					
 					url = 'post_picture.php';
