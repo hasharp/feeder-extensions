@@ -33,9 +33,6 @@
 			if (ourl in self.caches) {
 				var url = self.caches[ourl];
 				$(image).attr('src', url);
-				if (url == common.failedImage) {
-					$(image).css('zoom', '2');
-				}
 				return;
 			}
 			
@@ -55,6 +52,9 @@
 						}
 						url = JSON.parse(data['query']['results']['body'])['url']
 						//url = url.replace(/\/\/bot\./i, '//embed.');
+						
+						// キャッシュに登録
+						self.caches[ourl] = url;
 					} catch(e) {
 						// 取得処理に何らかのエラーが発生し、失敗した
 						
@@ -65,9 +65,6 @@
 					
 					// src書き換え
 					$(image).attr('src', url);
-					
-					// キャッシュに登録
-					self.caches[ourl] = url;
 				}
 			);
 		},
