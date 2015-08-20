@@ -68,6 +68,8 @@
 					$('#post_form_frame').css('opacity', '1');
 				})
 				.on('drop.dropFile', function(e) {
+					$('#post_form_frame').css('opacity', '1');
+					
 					var dataTransfer = e.originalEvent.dataTransfer;
 					
 					if (dataTransfer.files.length != 1) return true;
