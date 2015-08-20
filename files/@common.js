@@ -119,6 +119,35 @@ ninja_ads_count = 3;
 		output: {},
 	};
 	
+	// 投稿部に介入して編集
+	var orgPostFeed = window.postFeed;
+	window.postFeed = function() {
+		// 投稿内容を作成
+		var postData = {
+			name:        $('#post_form_name').val(),
+			content:     $('#' + activeForm).val(),
+			isImportant: $('#is_special').prop('checked'),
+			category:    $('input:radio[name=category_id_for_post]:checked').val() || 0,
+		};
+		
+		// フィルタ処理
+		for (var i in filterFunctions.input) {
+			postData = filterFunctions.input[i](postData);
+			if (postData == false) return;
+		}
+		
+		// 投稿内容を反映
+		$('#post_form_name').val(postData.name);
+		$('#' + activeForm).val(postData.content);
+		$('#is_special').prop('checked', postData.isImportant);
+		$('#category_id_for_post_' + postData.category).val('checked', true);
+		
+		// オリジナルの関数を呼び出す
+		orgPostFeed.call(this);
+		
+		return;
+	};
+	
 	// エントリ整形部に介入して編集
 	var lazyLoadTimer = null;
 	var orgArrangeFeed = window.arrangeFeed;
