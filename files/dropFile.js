@@ -81,7 +81,7 @@
 				dataTransfer.setData('text/plain', (isPicture ? '[P:*'+'/2]' : '[F:*]'));
 				*/
 				
-				appendText(focusForm, (isPicture ? '[P:*/2]' : '[F:*]'));
+				appendText(activeForm, (isPicture ? '[P:*/2]' : '[F:*]'));
 				
 				self.pendingFile = {
 					ready:     true,
