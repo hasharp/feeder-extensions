@@ -58,7 +58,7 @@
 	return {
 		'mimetypes': mimetypes,
 		'constructor': function() {
-			common.addFilter('embedAV', function(entries, skelton) {
+			common.addFilter('output', 'embedAV', function(entries, skelton) {
 				entries.forEach(function(entry, index, array) {
 					array[index][5] = entry[5].replace(/<button class="download_btn" onclick="window\.open\('(.+?)'\);">(.*?)<br \/>.*?<\/button>/ig, function(all, url, filename) {
 						var appendix = '';
@@ -78,7 +78,7 @@
 			});
 		},
 		'destructor': function() {
-			common.removeFilter('embedAV');
+			common.removeFilter('output', 'embedAV');
 		},
 	};
 });

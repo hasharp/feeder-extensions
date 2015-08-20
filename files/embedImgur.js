@@ -3,7 +3,7 @@
 (function(self, common, ext, fqon) {
 	return {
 		'constructor': function() {
-			common.addFilter('embedImgur', function(entries, skelton) {
+			common.addFilter('output', 'embedImgur', function(entries, skelton) {
 				entries = common.replaceURLs(entries, function(url, entry) {
 					var matches = url.match(/^https?:\/\/(?:i\.)?imgur\.com\/(\w+)(?:\.\w+)?/i);
 					if (matches) {
@@ -15,7 +15,7 @@
 			});
 		},
 		'destructor': function() {
-			common.removeFilter('embedImgur');
+			common.removeFilter('output', 'embedImgur');
 		},
 	};
 });

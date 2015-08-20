@@ -14,7 +14,7 @@
 			$('#'+id).append(object);
 		},
 		'constructor': function() {
-			common.addFilter('embedNiconico', function(entries, skelton) {
+			common.addFilter('output', 'embedNiconico', function(entries, skelton) {
 				entries = common.replaceURLs(entries, function(url, entry) {
 					var matches = url.match(/^https?:\/\/(?:www|m)\.nicovideo\.jp\/watch\/(\w+)/i);
 					if (matches) {
@@ -30,7 +30,7 @@
 			});
 		},
 		'destructor': function() {
-			common.removeFilter('embedNiconico');
+			common.removeFilter('output', 'embedNiconico');
 		},
 		'resize': function() {
 			if ((common.embedWidth - 10) * 9 < (common.embedHeight - 37) * 16) {

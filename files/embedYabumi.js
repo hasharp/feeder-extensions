@@ -3,7 +3,7 @@
 (function(self, common, ext, fqon) {
 	return {
 		'constructor': function() {
-			common.addFilter('embedYabumi', function(entries, skelton) {
+			common.addFilter('output', 'embedYabumi', function(entries, skelton) {
 				entries = common.replaceURLs(entries, function(url, entry) {
 					var matches = url.match(/^https:\/\/yabumi\.cc\/([\da-f]+)(?:\.\w+)$/i);
 					if (matches) {
@@ -14,7 +14,7 @@
 			});
 		},
 		'destructor': function() {
-			common.removeFilter('embedYabumi');
+			common.removeFilter('output', 'embedYabumi');
 		},
 	};
 });

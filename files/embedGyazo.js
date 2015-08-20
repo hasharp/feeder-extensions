@@ -4,7 +4,7 @@
 	return {
 		'caches': {},
 		'constructor': function() {
-			common.addFilter('embedGyazo', function(entries, skelton) {
+			common.addFilter('output', 'embedGyazo', function(entries, skelton) {
 				entries = common.replaceURLs(entries, function(url, entry) {
 					if (url.match(/^https?:\/\/gyazo\.com\/[\da-f]+/i)) {
 						return '<img src="'+common.loadingImage+'" data-url="'+url+'" onload="'+fqon+'.loadImage(this)" alt="'+url+'" class="extension-embed-image-nolazyload" />';
@@ -14,7 +14,7 @@
 			});
 		},
 		'destructor': function() {
-			common.removeFilter('embedGyazo');
+			common.removeFilter('output', 'embedGyazo');
 		},
 		'loadImage': function(image) {
 			// SOP回避のためにYQL使ったらソースコードが悲しいことに…

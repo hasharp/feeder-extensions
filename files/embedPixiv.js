@@ -16,7 +16,7 @@
 			});
 		},
 		'constructor': function() {
-			common.addFilter('embedPixiv', function(entries, skelton) {
+			common.addFilter('output', 'embedPixiv', function(entries, skelton) {
 				var i = 0;
 				entries = common.replaceURLs(entries, function(url, entry) {
 					var matches = url.match(/^https?:\/\/www\.pixiv.net\/member_illust.php\?.*?illust_id=(\d+)/);
@@ -42,7 +42,7 @@
 			});
 		},
 		'destructor': function() {
-			common.removeFilter('embedPixiv');
+			common.removeFilter('output', 'embedPixiv');
 			$(window).off('message.extension');
 		},
 		'resize': function() {

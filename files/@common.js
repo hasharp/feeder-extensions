@@ -112,7 +112,10 @@ ninja_ads_count = 3;
 	
 	
 	// フィルタ関数
-	var filterFunctions = {};
+	var filterFunctions = {
+		input:  {},
+		output: {},
+	};
 	
 	// エントリ整形部に介入して編集
 	var lazyLoadTimer = null;
@@ -122,8 +125,8 @@ ninja_ads_count = 3;
 		entries = JSON.parse(JSON.stringify(entry));
 		
 		// フィルタ処理
-		for (var i in filterFunctions) {
-			entry = filterFunctions[i](entry, skelton);
+		for (var i in filterFunctions.output) {
+			entry = filterFunctions.output[i](entry, skelton);
 		}
 		
 		// 読み込み完了時にイベントを発火するためのスクリプトを挿入する
@@ -137,15 +140,18 @@ ninja_ads_count = 3;
 	};
 	
 	// フィルタ関数を登録
-	self.addFilter = function(name, func) {
-		filterFunctions[name] = func;
+	self.addFilter = function(type, name, func) {
+		if (!(type in filterFunctions)) return false;
+		filterFunctions[type][name] = func;
+		return true;
 	};
 	
 	// フィルタ関数を削除
-	self.removeFilter = function(name) {
-		if (name in filterFunctions) {
-			delete filterFunctions[name];
-		}
+	self.removeFilter = function(type, name) {
+		if (!(type in filterFunctions)) return false;
+		if (!(name in filterFunctions[type])) return false;
+		delete filterFunctions[type][name];
+		return true;
 	};
 	
 	

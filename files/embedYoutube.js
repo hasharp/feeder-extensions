@@ -5,7 +5,7 @@
 (function(self, common, ext, fqon) {
 	return {
 		'constructor': function() {
-			common.addFilter('embedYoutube', function(entries, skelton) {
+			common.addFilter('output', 'embedYoutube', function(entries, skelton) {
 				// 動画
 				entries = common.replaceURLs(entries, function(url) {
 					var matches = url.match(/^https?:\/\/(?:www\.|m\.)?youtu(?:\.be|be\.com|be\-nocookie\.com).*[\/=]([\-\w]{11})/i);
@@ -24,7 +24,7 @@
 			});
 		},
 		'destructor': function() {
-			common.removeFilter('embedYoutube');
+			common.removeFilter('output', 'embedYoutube');
 		},
 		'resize': function() {
 			if (common.embedWidth * 9 < common.embedHeight * 16) {

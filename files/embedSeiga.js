@@ -3,7 +3,7 @@
 (function(self, common, ext, fqon) {
 	return {
 		'constructor': function() {
-			common.addFilter('embedSeiga', function(entries, skelton) {
+			common.addFilter('output', 'embedSeiga', function(entries, skelton) {
 				entries = common.replaceURLs(entries, function(url, entry) {
 					var matches = url.match(/^http:\/\/seiga.nicovideo.jp\/seiga\/im(\d+)/i);
 					if (matches) {
@@ -14,7 +14,7 @@
 			});
 		},
 		'destructor': function() {
-			common.removeFilter('embedSeiga');
+			common.removeFilter('output', 'embedSeiga');
 		},
 	};
 });

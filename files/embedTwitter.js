@@ -3,7 +3,7 @@
 (function(self, common, ext, fqon) {
 	return {
 		'constructor': function() {
-			common.addFilter('embedTwitter', function(entries, skelton) {
+			common.addFilter('output', 'embedTwitter', function(entries, skelton) {
 				entries = common.replaceURLs(entries, function(url, entry) {
 					var matches = url.match(/^https?:\/\/twitter\.com\/(?:.*)\/status(?:es)?\/(\d+)(?:[\/?].*)?$/);
 					if (matches) {
@@ -15,7 +15,7 @@
 			});
 		},
 		'destructor': function() {
-			common.removeFilter('embedTwitter');
+			common.removeFilter('output', 'embedTwitter');
 		},
 		'startup': function() {
 			$.getScript('//platform.twitter.com/widgets.js');
