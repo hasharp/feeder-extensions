@@ -8,18 +8,18 @@
 			var height = $obj.data('height');
 			var scale = Math.min(common.embedWidth / originalWidth, common.embedHeight / height, 1);
 			$obj.css({
-				'margin-right': ''+((scale-1)*originalWidth)+'px',
-				'margin-bottom': ''+((scale-1)*height)+'px',
-				'-ms-transform': 'scale('+scale+')',
+				'margin-right':      ''+((scale-1)*originalWidth)+'px',
+				'margin-bottom':     ''+((scale-1)*height)+'px',
+				'-ms-transform':     'scale('+scale+')',
 				'-webkit-transform': 'scale('+scale+')',
-				'transform': 'scale('+scale+')'
+				'transform':         'scale('+scale+')'
 			});
 		},
 		'constructor': function() {
 			common.addFilter('output', 'embedPixiv', function(entries, skelton) {
 				var i = 0;
 				entries = common.replaceURLs(entries, function(url, entry) {
-					var matches = url.match(/^https?:\/\/www\.pixiv.net\/member_illust.php\?.*?illust_id=(\d+)/);
+					var matches = url.match(/^https?:\/\/www\.pixiv\.net\/member_illust\.php\?.*?illust_id=(\d+)/);
 					if (matches) {
 						self.peCount++;
 						var id = 'embedPixiv_' + entry[0] + '_' + self.peCount;
@@ -33,11 +33,13 @@
 					return;
 				}
 				var data = JSON.parse(event.originalEvent.data);
-				var $obj = $('#'+data[0]);
-				$obj.data('height', data[1]);
-				$obj.css('height', data[1]+'px');
-				$obj.css('width', originalWidth+'px');
-				$obj.addClass('extension-embed-pixiv-loaded');
+				var $obj = $('#' + data[0])
+					.data('height', data[1])
+					.css({
+						'height': data[1] + 'px',
+						'width':  originalWidth + 'px',
+					})
+					.addClass('extension-embed-pixiv-loaded');
 				self.updateSize($obj);
 			});
 		},

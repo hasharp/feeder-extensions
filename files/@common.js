@@ -44,9 +44,11 @@ ninja_ads_count = 3;
 						$('<img/>')
 						.attr('src', 'img/emoticons/230.gif')
 						.attr('title', '投稿を再読み込み')
-						.css('height', '13px')
-						.css('margin', '0 6px 0 2px')
-						.css('cursor', 'pointer')
+						.css({
+							'height': '13px',
+							'margin': '0 6px 0 2px',
+							'cursor': 'pointer',
+						})
 						.click(function() {
 							var $entry = $(this).parents('.comment_frame').parent();
 							$entry.removeData('loaded');
