@@ -40,6 +40,8 @@
 				if (data.isImportant) formData.append('is_special', '1');
 				formData.append('category_id', data.category);
 				
+				$('#post_form_single, #post_form_multi, #post_btn').prop('disabled', true);
+				
 				$.ajax({
 					url:         url,
 					method:      'POST',
@@ -47,6 +49,7 @@
 					processData: false,
 					contentType: false,
 					complete:    function(data) {
+						$('#post_form_single, #post_form_multi, #post_btn').prop('disabled', false);
 						if (data.responseText != 'OK') {
 							alert(data.responseText);
 							return;
