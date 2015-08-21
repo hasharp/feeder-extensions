@@ -2,38 +2,31 @@
 
 (function(self, common, ext, fqon) {
 	return {
-		'pendingFile': {
-			ready: false,
-		},
+		'pendingFile': null,
 		'constructor': function() {
 			common.addFilter('input', 'dropFile', function(data) {
-				var ready = self.pendingFile.ready;
-				self.pendingFile.ready = false;
-				
-				if (!ready) return data;
+				var file = self.pendingFile
+				if (!file) return data;
 				
 				var formData = new FormData();
 				var url;
 				
-				if (self.pendingFile.isPicture) {
-					var match = data.content.match(/^([\s\S]*?)\[P:\*(?:\/(\d))?\]([\s\S]*)$/);
-					if (!match) return data;
+				var match;
+				if (match = data.content.match(/^([\s\S]*?)\[P:\*(?:\/(\d))?\]([\s\S]*)$/)) {
+					url = 'post_picture.php';
 					
 					formData.append('front_comment', match[1]);
 					formData.append('rear_comment', match[3]);
 					formData.append('frame_size', match[2] || '0');
-					formData.append('picture', self.pendingFile.file);
-					
-					url = 'post_picture.php';
-				} else {
-					var match = data.content.match(/^([\s\S]*?)\[F:\*\]([\s\S]*)$/);
-					if (!match) return data;
+					formData.append('picture', file);
+				} else if (match = data.content.match(/^([\s\S]*?)\[F:\*\]([\s\S]*)$/)) {
+					url = 'post_file.php';
 					
 					formData.append('front_comment', match[1]);
 					formData.append('rear_comment', match[2]);
-					formData.append('file', self.pendingFile.file);
-					
-					url = 'post_file.php';
+					formData.append('file', file);
+				} else {
+					return data;
 				}
 				
 				formData.append('name', data.name);
@@ -95,11 +88,7 @@
 					
 					appendText(activeForm, (isPicture ? '[P:*/2]' : '[F:*]'));
 					
-					self.pendingFile = {
-						ready:     true,
-						isPicture: isPicture,
-						file:      file,
-					};
+					self.pendingFile = file;
 					
 					return false;
 				});
