@@ -218,6 +218,23 @@ if (extensions && !extensions.features) {
 		$('#avatar_picker_icn').parent().append('<br><span id="extension_icons"></span>');
 		
 		
+		// スタイル変更
+		ext.commonFunctions.setStyle(
+			'table#extension-updatelog>thead>tr>th, table#extension-updatelog>tbody>tr>td',
+			'cursor: default;'
+			+ 'border-style: none;'
+			+ 'border-top: solid 1px #BFBFBF;'
+			+ 'font-size: 1em;'
+		);
+		ext.commonFunctions.setStyle('table#extension-updatelog>thead>tr>th, table#extension-updatelog .extension-updatelog-author, table#extension-updatelog .extension-updatelog-date', 'text-align: center;');
+		ext.commonFunctions.setStyle('table#extension-updatelog>tbody>tr>td.extension-updatelog-content', 'text-align: left;');
+		ext.commonFunctions.setStyle('table#extension-updatelog .extension-updatelog-author',  'width: 4em;');
+		ext.commonFunctions.setStyle('table#extension-updatelog .extension-updatelog-date',    'width: 10em;');
+		ext.commonFunctions.setStyle('table#extension-updatelog .extension-updatelog-content', 'width: 36em;');
+
+
+
+
 		// リストボックスの項目を移動する関数
 		ext.moveListboxItems = function(src, dst) {
 			var src = $(src);
@@ -248,6 +265,49 @@ if (extensions && !extensions.features) {
 				}
 			}
 			
+			// 更新内容取得
+			var updateList = '';
+			var data = $.ajax({
+				url: 'https://api.github.com/repos/vuf/feeder-extensions/commits',
+				type: 'get',
+				async: false,
+			});
+			if (data.status == 200) {
+				var formatDate = function(date) {
+					var td = function(_str) {
+						var str = '' + _str;
+						return str.length == 1 ? '0' + str : str;
+					};
+
+					var y = date.getFullYear();
+					var m = date.getMonth() + 1;
+					var d = date.getDate();
+					var h = date.getHours();
+					var i = date.getMinutes();
+
+					return (''+y).substr(-2) + '/' + td(m) + '/' + td(d) + ' ' + td(h) + ':' + td(i);
+				};
+
+				var commits = JSON.parse(data.responseText);
+				for (var i=0; i<commits.length; i++) {
+					updateList += '\t\t\t\t\t<tr>'
+									+ '\t\t\t\t\t\t<td class="extension-updatelog-author">'
+										+ htmlspecialchars(commits[i].commit.author.name)
+									+ '</td>'
+									+ '\t\t\t\t\t\t<td class="extension-updatelog-date">'
+										+ formatDate(new Date(commits[i].commit.committer.date))
+									+ '</td>'
+									+ '\t\t\t\t\t\t<td class="extension-updatelog-content">'
+										+ '<a href="' + htmlspecialchars(commits[i].html_url) + '" target="_blank">'
+											+ htmlspecialchars(commits[i].commit.message)
+										+ '</a>'
+									+ '</td>'
+								+ '\t\t\t\t\t</tr>\n';
+				}
+			} else {
+				updateList = '<tr><td rowspan="3">更新内容を取得できませんでした</td></tr>';
+			}
+
 			// ダイアログ書き出し
 			var parts = {
 				'ef_options': '',
@@ -284,6 +344,7 @@ if (extensions && !extensions.features) {
 			data += '		<ul>\n';
 			data += '			<li><a href="#extension-config-tabs-1">機能選択</a></li>\n';
 			data += '			<li><a href="#extension-config-tabs-2">詳細設定</a></li>\n';
+			data += '			<li><a href="#extension-config-tabs-3">更新履歴</a></li>\n';
 			data += '		</ul>\n';
 			data += '		<div id="extension-config-tabs-1" style="text-align: center;">\n';
 			data += '			<div>\n';
@@ -324,6 +385,24 @@ if (extensions && !extensions.features) {
 			data += '			<input type="checkbox" id="extension_skipdialog"'+(ext.getCookie('esd',ext.globalConfig)!='0'?' checked':'')+'><label for="extension_skipdialog">起動時に選択画面を表示しない</label><br>\n';
 			data += '			<label for="extension_skipdialog">埋め込み動画像の最大幅</label><input type="text" id="extension_embedwidth" style="width: 4em; margin: 0 0.5em;" value="'+ext.commonFunctions.embedWidth+'">px<br>\n';
 			data += '			<label for="extension_skipdialog">埋め込み動画像の最大高さ</label><input type="text" id="extension_embedheight" style="width: 4em; margin: 0 0.5em;" value="'+ext.commonFunctions.embedHeight+'">px<br>\n';
+			data += '		</div>\n';
+			data += '		<div id="extension-config-tabs-3" style="line-height: 2em;">\n';
+			data += '			<table id="extension-updatelog" style="border-collapse: collapse; width: 100%;">\n';
+			data += '				<thead>\n';
+			data += '					<tr>\n';
+			data += '						<th class="extension-updatelog-author">更新者</th>\n';
+			data += '						<th class="extension-updatelog-date">更新日時</th>\n';
+			data += '						<th class="extension-updatelog-content">更新内容</th>\n';
+			data += '					</tr>\n';
+			data += '				</thead>\n';
+			data += '				<tbody>\n';
+			data += updateList;
+			data += '				</tbody>\n';
+			data += '			</table>\n';
+			data += '			<hr />\n';
+			data += '			<p style="text-align: center;">';
+			data += '				IssueやPullReqなどは<a href="https://github.com/vuf/feeder-extensions" target="_blank" title="vuf/feeder-extensions - GitHub">こちら</a>で受け付けています';
+			data += '			</p>';
 			data += '		</div>\n';
 			data += '	</div>\n';
 			data += '	<div>\n';
