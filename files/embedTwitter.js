@@ -45,11 +45,11 @@
 				} else {
 					// ライブラリが未ロード
 					var func = function(id, element, count) {
-						if (count > 100) {
+						if (count > 20) {
 							return;
 						}
 						if (typeof(twttr) == 'undefined') {
-							setTimeout(func, 100, id, element, count+1);
+							setTimeout(func, 500, id, element, count+1);
 							return;
 						}
 						createTweet(id, element);
