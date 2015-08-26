@@ -16,7 +16,7 @@
 		'constructor': function() {
 			common.addFilter('output', 'embedNiconico', function(entries, skelton) {
 				entries = common.replaceURLs(entries, function(url, entry) {
-					var matches = url.match(/^https?:\/\/(?:www|m)\.nicovideo\.jp\/watch\/(\w+)/i);
+					var matches = url.match(/^https?:\/\/(?:www|sp|m)\.nicovideo\.jp\/watch\/(\w+)/i);
 					if (matches) {
 						self.neCount++;
 						var id = 'nicoEmbed_' + entry[0] + '_' + self.neCount;
