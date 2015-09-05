@@ -38,6 +38,12 @@ if (extensions && !extensions.features) {
 				'caption':     '式からダイスロールを行う',
 				'description': '投稿内容に式を入力してダイスロールを行います',
 			},
+			'addReplyButton': {
+				'available':   true,
+				'selected':    true,
+				'caption':     '投稿検索に引用ボタンを追加',
+				'description': '投稿検索の検索結果に引用ボタンを追加します',
+			},
 			'addPicturePicker': {
 				'available':   true,
 				'selected':    true,
