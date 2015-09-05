@@ -110,6 +110,12 @@ if (extensions && !extensions.features) {
 				'caption':     '吹き出しにTwitterを展開',
 				'description': '投稿にTwitterのツイートのアドレスが含まれていた場合、当該ツイートを埋め込みます',
 			},
+			'expandNestedQuotes': {
+				'available':   true,
+				'selected':    true,
+				'caption':     '引用の中の引用を展開',
+				'description': '引用の中に引用が含まれていた場合クリックで展開できるようにします',
+			},
 			'removeNotification': {
 				'available':   true,
 				'selected':    false,
