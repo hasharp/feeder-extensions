@@ -48,7 +48,7 @@
 							// 対象が存在しないIDならリンクにしない
 							if (common.roomInfo.latestEntryId > 0 && target > common.roomInfo.latestEntryId) return tag;
 							// リンク化
-							return '<a onclick="'+fqon+'.expand(this, '+from+', '+target+')">' + tag + '</a>';
+							return '<a class="clickable" onclick="'+fqon+'.expand(this, '+from+', '+target+')">' + tag + '</a>';
 						});
 					});
 				});
