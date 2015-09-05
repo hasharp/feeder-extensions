@@ -20,10 +20,11 @@
 				var id = $this.find('span.feed_id').text();
 				
 				var $reply = $('<div/>')
+								.attr('title', '投稿を引用')
 								.css({
-									'display':      'inline-block',
-									'margin-right': '0.5em',
-									'cursor':       'alias',
+									'display':       'inline-block',
+									'padding-right': '0.5em',
+									'cursor':        'alias',
 								})
 								.html(
 									$('<img/>')
