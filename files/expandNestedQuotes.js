@@ -41,12 +41,15 @@
 			// フィルタ関数登録
 			common.addFilter('output', 'expandNestedQuotes', function(entries, skelton) {
 				entries.forEach(function(entry, index, array) {
-					array[index][5] = entry[5].replace(/(<table class="ref">.+?)(&gt;&gt;(\d+))(.+?<span class="feed_id">(\d+)<\/span>.+?<\/table>)/g, function(all, prefix, tag, target, suffix, from) {
-						// 対象が存在しないIDならリンクにしない
-						target = parseInt(target);
-						if (common.roomInfo.latestEntryId > 0 && target > common.roomInfo.latestEntryId) return all;
-						// リンク化
-						return prefix + '<a onclick="'+fqon+'.expand(this, '+from+', '+target+')">' + tag + '</a>' + suffix;
+					// まず引用を抜き出して
+					array[index][5] = entry[5].replace(/<table class="ref">[\s\S]+?<span class="feed_id">(\d+)<\/span>[\s\S]+?<\/table>/g, function(all, from) {
+						// そこから更にその中の引用を抜き出す
+						return all.replace(/&gt;&gt;(\d+)/g, function(tag, target) {
+							// 対象が存在しないIDならリンクにしない
+							if (common.roomInfo.latestEntryId > 0 && target > common.roomInfo.latestEntryId) return tag;
+							// リンク化
+							return '<a onclick="'+fqon+'.expand(this, '+from+', '+target+')">' + tag + '</a>';
+						});
 					});
 				});
 				return entries;
