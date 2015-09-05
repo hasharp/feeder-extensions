@@ -167,6 +167,14 @@ ninja_ads_count = 3;
 			entry[entry.length-1][5] += '<script type="text/javascript">'+fqon+'.loadedEntries();</script>';
 		}
 		
+		// 最終エントリID更新
+		if (!skelton) {
+			var id = parseInt(entry[0][0]);
+			if (id > self.roomInfo.latestEntryId) {
+				self.roomInfo.latestEntryId = id;
+			}
+		}
+		
 		// オリジナルの関数を呼び出す
 		var result = orgArrangeFeed.call(this, entry, skelton);
 		
