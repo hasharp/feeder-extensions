@@ -314,7 +314,7 @@ ninja_ads_count = 3;
 	// syncCallback登録
 	socket.on('syncCallback', function(data) {
 		if (data.code == 3 || data.code == 4) {
-			var entry = getFeedArray();
+			var entry = getFeedArray(data.param);
 			
 			// 最後のエントリのID更新
 			var id = parseInt(entry[0][0]);
