@@ -23,6 +23,7 @@ ninja_ads_count = 3;
 		isPremium:          isPremium,
 		maxFileSize:        (isPremium ? 100 : 10) * 1024 * 1024,
 		maxPictureFileSize: 5 * 1024 * 1024,
+		latestEntryId:      0,
 	};
 	
 	
@@ -307,6 +308,21 @@ ninja_ads_count = 3;
 			},
 		});
 	};
+	
+	
+	
+	// syncCallback登録
+	socket.on('syncCallback', function(data) {
+		if (data.code == 3 || data.code == 4) {
+			var entry = getFeedArray();
+			
+			// 最後のエントリのID更新
+			var id = parseInt(entry[0][0]);
+			if (id > self.roomInfo.latestEntryId) {
+				self.roomInfo.latestEntryId = id;
+			}
+		}
+	});
 	
 	return self;
 });
