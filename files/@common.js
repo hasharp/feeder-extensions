@@ -20,6 +20,7 @@ ninja_ads_count = 3;
 	var isPremium = !!$('#header>h1>img[src$="/crown.png"]').length;
 	
 	self.roomInfo = {
+		subdomain:          location.hostname.split('.')[0],
 		isPremium:          isPremium,
 		maxFileSize:        (isPremium ? 100 : 10) * 1024 * 1024,
 		maxPictureFileSize: 5 * 1024 * 1024,
