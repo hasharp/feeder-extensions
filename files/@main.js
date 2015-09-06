@@ -20,6 +20,10 @@ if (extensions && !extensions.features) {
 				'available':   true,
 				'force':       true,
 			},
+			'konamikan': {
+				'available':   true,
+				'force':       true,
+			},
 			'unicorn': {
 				'available':   (profileId == 'Airmodo' || ext.debug),
 				'selected':    false,
