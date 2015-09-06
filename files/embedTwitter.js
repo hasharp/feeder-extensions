@@ -31,11 +31,14 @@
 				$(this).addClass('extension-embed-twitter');
 				
 				var createTweet = function(id, element) {
-					twttr.widgets.createTweet(id, element).then(function(e) {
-						if (e == undefined) {
-							// ツイートが読めなかった模様
-							$(element).remove().after('<a data-external="true" href="'+htmlspecialchars($(element).data('url'))+'" target="_blank">'+htmlspecialchars($(element).data('url'))+'</a>').remove();
-						}
+					twttr.widgets.createTweet(id, element).catch(function(e) {
+						// ツイートが読めなかった模様
+						var $link = $('<a/>')
+										.data('external', true)
+										.attr('href', $(element).data('url'))
+										.attr('target', '_blank')
+										.text($(element).data('url'));
+						$(element).after($link).remove();
 					});
 				};
 				
