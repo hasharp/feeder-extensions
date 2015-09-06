@@ -4,7 +4,7 @@
 	// 受信した新着メッセージの数
 	var receivedMessageNum = 0;
 	
-	// 送受信ボックス表示関数書き換え
+	// 送受信ボックス表示関数書き換え準備
 	var orgViewMessages = window.viewMessages;
 	var viewMessages = function(mode) {
 		if (mode == 'inbox') {

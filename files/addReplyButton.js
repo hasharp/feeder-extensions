@@ -1,7 +1,7 @@
 // 投稿検索の検索結果に引用ボタンを追加する拡張機能
 
 (function(self, common, ext, fqon) {
-	// 送受信ボックス表示関数書き換え準備
+	// 検索結果表示関数書き換え準備
 	var orgSearchFeed = window.searchFeed;
 	var searchFeed = function(page) {
 		// オリジナルの関数を呼び出す
