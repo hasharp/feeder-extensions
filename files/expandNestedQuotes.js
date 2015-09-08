@@ -50,7 +50,7 @@
 						// そこから更にその中の引用を抜き出す
 						return all.replace(/&gt;&gt;(\d+)/g, function(tag, target) {
 							// 対象が存在しないIDならリンクにしない
-							if (common.roomInfo.latestEntryId > 0 && target > common.roomInfo.latestEntryId) return tag;
+							if (common.roomInfo.latestEntryId > 0 && target > common.roomInfo.latestEntryId + 1) return tag;
 							// リンク化
 							return '<a class="clickable" onclick="'+fqon+'.expand(this, '+from+', '+target+')">' + tag + '</a>';
 						});
