@@ -25,14 +25,18 @@
 							rawEntry = entryList[i];
 						}
 					}
+					
+					// その中から適合する引用を探す
+					var entry = $(arrangeFeed(getFeedArray(rawEntry, false)));
+					var quote = entry.find('span.feed_id:contains('+target+')').parents('table.ref');
+					
 					// なければ元に戻す
-					if (rawEntry == '') {
+					if (quote.length < 1) {
 						$element.html(originalHtml);
 						return;
 					}
-					// あれば表示
-					var entry = $(arrangeFeed(getFeedArray(rawEntry, false)));
-					var quote = entry.find('span.feed_id:contains('+target+')').parents('table.ref');
+					
+					// 表示
 					$element.after(quote).remove();
 				});
 			});
