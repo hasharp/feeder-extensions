@@ -27,8 +27,9 @@
 		},
 		'load': function() {
 			$('.extension-embed-twitter-unloaded').each(function() {
-				$(this).removeClass('extension-embed-twitter-unloaded');
-				$(this).addClass('extension-embed-twitter');
+				$(this)
+					.removeClass('extension-embed-twitter-unloaded')
+					.addClass('extension-embed-twitter');
 				
 				var createTweet = function(id, element) {
 					twttr.widgets.createTweet(id, element).catch(function(e) {
