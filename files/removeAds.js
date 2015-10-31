@@ -8,11 +8,18 @@
 		}
 		switch (method) {
 			case 'show':
-				object.show();
+				object.css('overflow', object.data('orgOverflow'));
+				object.css('width', object.data('orgWidth'));
+				object.css('height', object.data('orgHeight'));
 				break;
 			
 			case 'hide':
-				object.hide();
+				object.data('orgOverflow', object.css('overflow'));
+				object.data('orgWidth', object.css('width'));
+				object.data('orgHeight', object.css('height'));
+				object.css('overflow', 'hidden');
+				object.css('width', 0);
+				object.css('height', 0);
 				break;
 		}
 	}
